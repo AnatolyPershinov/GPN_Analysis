@@ -1,0 +1,15 @@
+table_name,cardinality,degree
+dic_units,152,2
+dic_resource_names,3007,3
+dic_upper_works,41617,2
+dic_work_titles,57053,2
+json_projects,8,2
+progress_ranges,294068,5
+res_progress_ranges,121297,5
+json_files,13466,6
+json_validation_files,22732,4
+json_validation_file_names,13499,4
+json_resources,803797,6
+json_validation_resources,1228590,4
+json_works,10943493,27
+json_validation_works,20254686,4
