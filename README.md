@@ -4,7 +4,7 @@
 ![ER Diagram](/images/postgrespublic.png)
 
 
-##### To connect to the database, you need to create and fill out a file src/database.ini
+##### To connect to the database, you need to create and fill out a file database_report/database.ini
 
 ####  database.ini example:
  ```
