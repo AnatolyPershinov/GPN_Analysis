@@ -1,7 +1,13 @@
+import os
+
 from configparser import ConfigParser
 
 
-def config(filename='database.ini', section='posrgres'):
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__)) # This is your Project Root
+print(f'{ROOT_DIR}\database.ini')
+
+
+def config(filename=f'{ROOT_DIR}\database.ini', section='postgres'):
     # create a parser
     parser = ConfigParser()
     # read config file

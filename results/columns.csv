@@ -1,77 +1,77 @@
-table_name,column_name,data_type,unique_values_count,max_value,min_value
-dic_units,rid,integer,,152,1
-dic_units,unit_name,character varying,152,19,0
-dic_resource_names,rid,bigint,,3007,1
-dic_resource_names,resource_name,character varying,3007,129,0
-dic_resource_names,resource_type,smallint,,2,0
-dic_upper_works,rid,bigint,,41617,1
-dic_upper_works,upper_works,character varying,41617,16449,0
-dic_work_titles,rid,bigint,,57053,1
-dic_work_titles,work_title,character varying,57053,323,1
-json_projects,rid,smallint,,8,1
-json_projects,project_name,character varying,8,11,3
-progress_ranges,rid,bigint,,294068,1
-progress_ranges,date_range,daterange,,,
-progress_ranges,plans,ARRAY,,,
-progress_ranges,facts,ARRAY,,,
-progress_ranges,raw_data,character varying,294068,22457,0
-res_progress_ranges,rid,bigint,,121297,1
-res_progress_ranges,date_range,daterange,,,
-res_progress_ranges,plans,ARRAY,,,
-res_progress_ranges,facts,ARRAY,,,
-res_progress_ranges,raw_data,character varying,121297,18841,0
-json_files,rid,integer,,13466,1
-json_files,file_path,character varying,13466,130,22
-json_files,project_rid,smallint,,8,1
-json_files,parse_status,smallint,,3,3
-json_files,parse_message,character varying,1,,
-json_files,json_file_name,character varying,13029,120,7
-json_validation_files,rid,bigint,,22732,1
-json_validation_files,file_rid,bigint,,13466,1
-json_validation_files,result_code,smallint,,3,0
-json_validation_files,message,character varying,784,330,44
-json_validation_file_names,rid,bigint,,13499,1
-json_validation_file_names,file_rid,bigint,,13466,1
-json_validation_file_names,result_code,smallint,,3,0
-json_validation_file_names,message,character varying,2988,80,10
-json_resources,rid,bigint,,803797,1
-json_resources,file_rid,bigint,,13466,10
-json_resources,resource_id,character varying,363011,18,0
-json_resources,comments,character varying,157,124,0
-json_resources,progress_id,bigint,,121297,1
-json_resources,resource_name_id,bigint,,3007,1
-json_validation_resources,rid,bigint,,1228590,1
-json_validation_resources,resource_rid,bigint,,803797,1
-json_validation_resources,result_code,smallint,,6,0
-json_validation_resources,message,character varying,1,,
-json_works,rid,bigint,,10943493,1
-json_works,file_rid,integer,,13466,1
-json_works,work_id,character varying,187076,97,0
-json_works,work_title_id,bigint,,57053,1
-json_works,upper_works_id,bigint,,41617,1
-json_works,measurements_id,integer,,152,1
-json_works,amount,real,,190707810.0,-2146826200.0
-json_works,start_date_plan,date,,2023-06-18,2001-01-20
-json_works,start_date_estimate,date,,2020-04-30,1900-01-02
-json_works,start_date_fact,date,,2019-12-27,2005-02-07
-json_works,stop_date_plan,date,,2023-06-20,1936-11-21
-json_works,stop_date_estimate,date,,2448-06-10,2001-10-04
-json_works,stop_date_fact,date,,2024-09-21,1906-11-24
-json_works,complete_state_perc_plan,real,,175397540000000.0,-81500000.0
-json_works,complete_state_perc_fact,real,,942951.44,-163000000.0
-json_works,complete_state_value_plan,real,,20170723000000.0,-2146826200.0
-json_works,complete_state_value_fact,real,,1755644.0,-2146826200.0
-json_works,current_remain_perc,real,,100.0,-1809.091
-json_works,current_remain_value,real,,456009.0,0.0
-json_works,whole_remain_perc,real,,10377.78,0.0
-json_works,whole_ramain_value,real,,1147236.0,-2146826200.0
-json_works,month_complete_percent_plan,real,,38183.33,-81500000.0
-json_works,month_complete_percent_fact,real,,206328.58,-163000000.0
-json_works,month_complete_value_plan,real,,621825.0,-2146826200.0
-json_works,month_complete_value_fact,real,,34106052000000.0,-2146826200.0
-json_works,comment_text,character varying,5240,314,0
-json_works,progress_id,bigint,,294068,1
-json_validation_works,rid,bigint,,20254686,1
-json_validation_works,work_rid,bigint,,10943493,1
-json_validation_works,result_code,smallint,,6,0
-json_validation_works,message,character varying,2,13,13
+table_name,column_name,data_type,unique_values_count,max_value,min_value,not_null_count,total_count
+dic_units,rid,integer,152,1,152,152,152
+dic_units,unit_name,character varying,152,0,19,151,152
+dic_resource_names,rid,bigint,3007,1,3007,3007,3007
+dic_resource_names,resource_name,character varying,3007,0,129,3006,3007
+dic_resource_names,resource_type,smallint,3,0,2,3007,3007
+dic_upper_works,rid,bigint,41617,1,41617,41617,41617
+dic_upper_works,upper_works,character varying,41617,0,515,41616,41617
+dic_work_titles,rid,bigint,57053,1,57053,57053,57053
+dic_work_titles,work_title,character varying,57053,0,177,57052,57053
+json_projects,rid,smallint,8,1,8,8,8
+json_projects,project_name,character varying,8,3,11,8,8
+progress_ranges,rid,bigint,294068,1,294068,294068,294068
+progress_ranges,date_range,daterange,49450,,,294067,294068
+progress_ranges,plans,ARRAY,122769,0,154,274793,294068
+progress_ranges,facts,ARRAY,143741,0,132,195662,294068
+progress_ranges,raw_data,character varying,294068,0,1250,294068,294068
+res_progress_ranges,rid,bigint,121297,1,121297,121297,121297
+res_progress_ranges,date_range,daterange,7648,,,121296,121297
+res_progress_ranges,plans,ARRAY,17352,0,293,115794,121297
+res_progress_ranges,facts,ARRAY,75940,0,273,115304,121297
+res_progress_ranges,raw_data,character varying,121297,0,1569,121297,121297
+json_files,rid,integer,13466,1,13466,13466,13466
+json_files,file_path,character varying,13466,22,130,13466,13466
+json_files,project_rid,smallint,8,1,8,13466,13466
+json_files,parse_status,smallint,1,0,0,13466,13466
+json_files,parse_message,character varying,1,0,0,0,13466
+json_files,json_file_name,character varying,13029,7,120,13466,13466
+json_validation_files,rid,bigint,22732,1,22732,22732,22732
+json_validation_files,file_rid,bigint,13466,1,13466,22732,22732
+json_validation_files,result_code,smallint,4,0,3,22732,22732
+json_validation_files,message,character varying,784,0,330,13983,22732
+json_validation_file_names,rid,bigint,13499,1,13499,13499,13499
+json_validation_file_names,file_rid,bigint,13466,1,13466,13499,13499
+json_validation_file_names,result_code,smallint,3,0,3,13499,13499
+json_validation_file_names,message,character varying,2988,0,80,7268,13499
+json_resources,rid,bigint,803797,1,803797,803797,803797
+json_resources,file_rid,bigint,12217,10,13466,803797,803797
+json_resources,resource_id,character varying,363011,0,18,743822,803797
+json_resources,comments,character varying,157,0,7,241643,803797
+json_resources,progress_id,bigint,121297,1,121297,803797,803797
+json_resources,resource_name_id,bigint,3007,1,3007,803797,803797
+json_validation_resources,rid,bigint,1228590,1,1228590,1228590,1228590
+json_validation_resources,resource_rid,bigint,803797,1,803797,1228590,1228590
+json_validation_resources,result_code,smallint,7,0,6,1228590,1228590
+json_validation_resources,message,character varying,1,0,0,0,1228590
+json_works,rid,bigint,10943493,1,10943493,10943493,10943493
+json_works,file_rid,integer,12606,1,13466,10943493,10943493
+json_works,work_id,character varying,187076,0,19,9119214,10943493
+json_works,work_title_id,bigint,57053,1,57053,10943493,10943493
+json_works,upper_works_id,bigint,41617,1,41617,10943493,10943493
+json_works,measurements_id,integer,152,1,40,10943493,10943493
+json_works,amount,real,14634,0,0,10799965,10943493
+json_works,start_date_plan,date,3050,0,0,6710432,10943493
+json_works,start_date_estimate,date,841,0,0,295197,10943493
+json_works,start_date_fact,date,1844,0,0,4609420,10943493
+json_works,stop_date_plan,date,3083,0,0,6706647,10943493
+json_works,stop_date_estimate,date,879,0,0,387866,10943493
+json_works,stop_date_fact,date,1815,0,0,4270039,10943493
+json_works,complete_state_perc_plan,real,9149,0,0,813999,10943493
+json_works,complete_state_perc_fact,real,66140,0,0,9113612,10943493
+json_works,complete_state_value_plan,real,45615,0,0,10699910,10943493
+json_works,complete_state_value_fact,real,35032,0,0,10709635,10943493
+json_works,current_remain_perc,real,11917,0,0,631290,10943493
+json_works,current_remain_value,real,10045,0,0,705109,10943493
+json_works,whole_remain_perc,real,18982,0,0,806213,10943493
+json_works,whole_ramain_value,real,21470,0,0,2332261,10943493
+json_works,month_complete_percent_plan,real,4408,0,0,701150,10943493
+json_works,month_complete_percent_fact,real,52857,0,0,7868854,10943493
+json_works,month_complete_value_plan,real,41997,0,0,10755313,10943493
+json_works,month_complete_value_fact,real,19987,0,0,10754896,10943493
+json_works,comment_text,character varying,5240,0,0,9042910,10943493
+json_works,progress_id,bigint,294068,1,294068,10943493,10943493
+json_validation_works,rid,bigint,20254686,1,20254686,20254686,20254686
+json_validation_works,work_rid,bigint,10943493,1,10943493,20254686,20254686
+json_validation_works,result_code,smallint,7,0,6,20254686,20254686
+json_validation_works,message,character varying,2,0,0,2,20254686
