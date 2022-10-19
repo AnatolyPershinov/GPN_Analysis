@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+/analyse_table.ipynb
 # Distribution / packaging
 .Python
 build/
