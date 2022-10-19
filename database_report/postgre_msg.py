@@ -40,7 +40,7 @@ def connect():
 
 def cut_tails(array, min, max):
     array_cut = []
-    qmax, qmin = np.percentile(array, [max, min])
+    qmax, qmin = np.nanpercentile(array, [max, min])
     interval = qmax - qmin
 
     min_dist = qmin - (1.5 * interval)
@@ -107,9 +107,16 @@ def get_report(conn):
 
             print(f"handle {column_name} from {table_name}")
 
-            if data_type != "daterange":
+            if data_type not in ["daterange", "date"]:
                 max_value, min_value = findbounds(conn, table_name, column_name, data_type)
-
+            elif data_type == "date":
+                cursor.execute(f"""
+                SELECT MAX({column_name}), MIN({column_name})
+                FROM {table_name}
+                """)
+                d = cursor.fetchone()
+                max_value, min_value = d[0], d[1] 
+                
             # количество уникальных значений в таблице (и)
 
             cursor.execute(f"""
@@ -136,8 +143,8 @@ def get_report(conn):
                 "column_name": column_name,
                 "data_type": data_type,
                 "unique_values_count": unique,
-                "max_value": max_value,
                 "min_value": min_value,
+                "max_value": max_value,
                 "not_null_count": not_null,
                 "total_count": total,
             })
@@ -161,11 +168,13 @@ def findbounds(connect, table, column, data_type):
             array = np.array([len(d[0]) if d[0] is not None else 0 for d in df.values])  # в случае текстовых полей записываем длину в список
         else:
             array = np.array([d[0] if d[0] is not None else 0 for d in df.values])  # числа приводим к единому виду
+            if data_type == "real":
+                print(array)
         
         cut_array = cut_tails(array, 5, 95)  # обрезка хвостов. 5% и 95%
 
     try:
-        return min(cut_array), max(cut_array)
+        return max(cut_array), min(cut_array)
     except Exception as e:
         print(column, data_type, e)
         return 0, 0
