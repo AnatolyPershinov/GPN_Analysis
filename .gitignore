@@ -163,4 +163,4 @@ cython_debug/
 DATA/
 files.csv
 analyze.ipynb
-
+result.cvs
