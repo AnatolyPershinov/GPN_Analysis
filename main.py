@@ -15,6 +15,25 @@ logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w")
 logging.info("script started")
 
 
+def check_matching(word: str, keywords: list[str]):
+    """метод проверяет входит ли хотя-бы одно слово из списка keywords в строку word"""
+    for k in keywords:
+        if k in word:
+            return True
+    return False
+
+
+def simple_str(string: str):
+    """Мето удаляет символы пробела, переноса строки, табуляции, избавляется от заглавных букв
+    если строка, после удаления из неё точек, может быть считана как число, то, функция вернёт None"""
+    res = string.lower().replace("_", "").replace(" ", "")
+    res = res.replace("\n", "").replace("\t", "")
+    res = res.replace(".", "").replace(",", "")
+    if res.isdigit() or res == "":
+       return None
+    else:
+        return res
+
 def read(file):
     """считывает файлы xl
     возращает список с уникальными словами для каждого файла"""
@@ -33,12 +52,15 @@ def read(file):
     for k, v in df_dict.items():
         for r in v.values.tolist():
             res.extend(r)
+            
+    res = {simple_str(k) for k in res if type(k) is str}
+    if None in res:
+        res.remove(None)
     
-    res = {k for k in res if type(k) is str}
     return res
     
 
-def main(files):
+def parse_all_words(files):
     """основной метод. отправляет файлы на чтение 
     затем вызывает метод обработки для каждого файла
     собирает данные в список result"""
@@ -63,7 +85,36 @@ def main(files):
             logging.error(f"{e} {path}")
 
         
-            
+def find_files_with_param(files: list, keywords: list):
+    res = []
+    """метод, которые ищет файлы, со словами из списка keywords"""
+    count = 0
+   
+    for path in files:
+        count+=1
+        try:
+            group = path[0]
+            file = path[1]
+            _file = file.split(group)[1]
+
+        except IndexError as e: 
+            logging.error(f"{e} {path}")
+        try:
+            words = read(file)
+            array = [k for k in words if check_matching(word=k, keywords=keywords)]
+            print("ПРОЧИТАН ФАЙЛ {}/{}   {}".format(count, len(files), path[1]))
+            res.append({
+                "group": group,
+                "file": f"{group}\\{_file}",
+                "guid_count": len(array),
+                "body": None if len(array) == 0 else str(array), 
+            })
+        except Exception as e:
+            print("НЕ УДАЛОСЬ ПРОЧИТАТЬ ФАЙЛ {} {}".format(path, e))
+            continue
+
+    return res
+
 
 def prepare_files():
     """находит все xl файлы по пути DATA\\<group_name>, 
@@ -90,13 +141,15 @@ if __name__ == "__main__":
         files = csv.reader(f, delimiter="\t", quotechar='|')
         files = list(files)[1:]
     
-
-    main(files)
-
-    save_to_csv('results\\mpresult.csv', result.get_report())
+    
+    # result = find_files_with_param(files, keywords=["id"])
+    # save_to_csv("results\\files_guid.csv", result)
+    
+    parse_all_words(files)
+    save_to_csv('results\\result_04_11_2022.csv', result.get_report())
     
     # выделить в отдельный метод
-    df = pd.read_csv("results\\mpresult.csv", delimiter="\t")
-    df = df.sort_values(by='total_count',  ascending=False)
-    df.to_csv("results\\result.csv")
+    # df = pd.read_csv("results\\mpresult.csv", delimiter="\t")
+    # df = df.sort_values(by='total_count',  ascending=False)
+    # df.to_csv("results\\result.csv")
     
