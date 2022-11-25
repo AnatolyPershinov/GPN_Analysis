@@ -6,7 +6,7 @@ import sys
 import time
 import re
 
-from getfiles import save_to_csv, check_files
+from getfiles import check_files, save_to_csv
 
 
 warnings.filterwarnings("ignore")
@@ -47,7 +47,7 @@ def read(file):
     return res_rows
     
 
-def main(files):
+def handle(files):
     """основной метод. отправляет файлы на чтение 
     затем вызывает метод обработки для каждого файла
     собирает данные в список result"""
@@ -89,23 +89,23 @@ def prepare_files():
     __GROUPS__ = ["\\СМГ Мессояха", "\\СМГ ННГ", "\\Томский интегрированный проект"]
     
     try:
-        save_to_csv("results\\files.csv", check_files(__GROUPS__))
+        save_to_csv("parse_words_from_py\\results\\files.csv", check_files(__GROUPS__, name=".py"))
     except Exception as e:
         logging.error(f"{e}")
 
 
-if __name__ == "__main__":   
+def main():
     """точка входа"""
     
     prepare_files()
     """считать список файлов"""
-    with open("results\\files.csv", "r", encoding="UTF-8", newline="") as f:
+    with open("parse_words_from_py\\results\\files.csv", "r", encoding="UTF-8", newline="") as f:
         files = csv.reader(f, delimiter="\t", quotechar='|')
         files = list(files)[1:]
 
     
 
-    save_to_csv('results\\keywords.csv', main(files))
+    save_to_csv('parse_words_from_py\\results\\keywords.csv', handle(files))
     
     # выделить в отдельный метод
     # df = pd.read_csv("results\\mpresult.csv", delimiter="\t")

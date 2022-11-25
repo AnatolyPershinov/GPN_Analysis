@@ -7,7 +7,7 @@ import sys
 import time
 
 from getfiles import save_to_csv, check_files
-from parse_words import Calc 
+from parse_words_from_xl.parse_words import Calc 
 
 
 warnings.filterwarnings("ignore")
