@@ -1,3 +1,5 @@
+from pathlib import Path
+import sys
 
 from analyze import getfiles
 import pandas as pd
@@ -17,16 +19,18 @@ def simple_str(string: str):
 def analyze(sheet: pd.DataFrame):
     """получить таблицу работ"""
     res = pd.DataFrame()
-    guid = guid_contain(sheet)
+    guid = guid_contain(sheet)[0]
+    p_complete = guid_contain(sheet)[1]
 
     if guid == -1:
         return None
     
     res = sheet[(sheet == "план").any(axis=1)]
     head = [guid + k for k in [0, 1, 2, 3]]
+    head.append(p_complete)
     res = res[head]
     # res.dropna(subset=[head[:-1]])
-    res = res.rename(columns={guid+0: "guid", guid+1: "work id", guid+2: "work title", guid+3: "contractor"})
+    res = res.rename(columns={guid+0: "guid", guid+1: "work id", guid+2: "work title", guid+3: "contractor", p_complete: ""})
     return res[1:]
 
 
@@ -45,8 +49,13 @@ def guid_contain(sheet):
             for cell in array[i]:
                 if not type(cell) is str:
                     continue
+                g_index, p_index = None
                 if "guid" in simple_str(cell):
-                    return array[i].index(cell)
+                    g_index = array[i].index(cell)
+                if "%выполнения" in simple_str(cell):
+                    p_index = array[i].index(cell)
+                if g_index != None:
+                    return(g_index, p_index)
     return -1
         
 
