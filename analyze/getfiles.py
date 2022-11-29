@@ -1,8 +1,11 @@
 import os
 import csv
+import sys
 
+a = os.path.basename(__file__)
 
-__ROOT__ = "E:\\GPN_Project\\MSG_Data_Parsers\\"
+__ROOT__ = os.path.abspath(__file__).replace(a, '')
+print(__ROOT__)
 
 def check_files(groups, name=".xl"):
     """проходит по всей директории. ищет файлы"""
@@ -23,8 +26,9 @@ def check_files(groups, name=".xl"):
     return filelist
 
 
-def save_to_csv(filename, array, is_dataframe=None):
+def save_to_csv(filename: str, array: list[dict], is_dataframe=None):
     """запись данных в csv"""
+    filename = __ROOT__ + filename
     if is_dataframe:
         array.to_csv(filename, sep=";", index=False)
     else:
